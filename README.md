@@ -5,4 +5,4 @@ permalink: /index.html
 ---
 
 ---
-live link : https://rishu.enginner
+live link : https://rishu.engineer
