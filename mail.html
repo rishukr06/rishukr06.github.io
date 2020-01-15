@@ -20,6 +20,8 @@ $(document).ready(function(){
         //$("#mailSpin").css('display','inline-block');
         //var email = $("#email").val();
         var name = $("#name").val();
+        var data = {}
+        data["name"] = name;
         console.log(name);
         if(name.length!=0)
         {
@@ -27,9 +29,7 @@ $(document).ready(function(){
                 type: "POST",
                 contentType: "application/json",
                 url: 'https://rishukr06.000webhostapp.com/code/sendgrid/code/index.php',
-                data:{
-                    "name" : name
-                    },
+                data: JSON.stringify(data),
                 dataType: 'json',
                 timeout: 600000,
                 cache: false,
