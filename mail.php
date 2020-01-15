@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mail</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+   <span>name : <input type="text" name="name" id="name"></span>
+   <br />
+    <button id="mailbtn">send</button>
+
+<script>
+$(document).ready(function(){
+
+// mail invoice
+    $("#mailbtn").click(function(){
+        //$("#mailSpin").css('display','inline-block');
+        //var email = $("#email").val();
+        var name = $("#name").val();
+        console.log(name);
+        if(name.length!=0)
+        {
+            $.ajax({
+                type: "POST",
+                url: 'https://rishukr06.000webhostapp.com/code/sendgrid/code/index.php',
+                data:{
+                    "name" : name
+                    }, 
+                cache: true,
+                success: function(response)
+                {
+                    if(response['status']===500)
+                    {
+                        alert("mail not sent")
+                    }
+                    else if(response['status']===200)
+                    {
+                        alert("mail sent");
+                    }
+                    else{
+                        alert("something went wrong!"); 
+                    } 
+                   // $("#mailSpin").css('display','none');
+                },
+                error: function (jqXHR, exception) 
+                {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert(msg);
+                }
+            });
+        }
+        else{
+            alert ('sorry! Name not set!')
+        }
+    
+    });
+
+
+});
+</script>
+</body>
+</html>
