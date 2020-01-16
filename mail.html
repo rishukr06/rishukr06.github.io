@@ -8,7 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
+    <form action="" id="my-form">
    <span>name : <input type="text" name="name" id="name"></span>
+</form>
    <br />
     <button id="mailbtn">send</button>
 
@@ -20,19 +22,17 @@ $(document).ready(function(){
         //$("#mailSpin").css('display','inline-block');
         //var email = $("#email").val();
         var name = $("#name").val();
-        var data = {}
-        data["name"] = name;
-        console.log(name);
+     
         if(name.length!=0)
         {
+            
             $.ajax({
-                type: "POST",
-                contentType: "application/json",
+                type: 'POST',
                 url: 'https://rishukr06.000webhostapp.com/code/sendgrid/code/index.php',
-                data: JSON.stringify(data),
-                dataType: 'json',
-                timeout: 600000,
+                data: {'name':name},
+     
                 cache: false,
+               
                 success: function(response)
                 {
                     if(response['status']===500)
