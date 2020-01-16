@@ -10,6 +10,8 @@
 <body>
     <form action="" id="my-form">
    <span>name : <input type="text" name="name" id="name"></span>
+        <br/>
+        <span>Mobile : <input type="text" name="mobile" id="mobile"></span>
 </form>
    <br />
     <button id="mailbtn">send</button>
@@ -22,6 +24,7 @@ $(document).ready(function(){
         //$("#mailSpin").css('display','inline-block');
         //var email = $("#email").val();
         var name = $("#name").val();
+         var mobile = $("#mobile").val();
      
         if(name.length!=0)
         {
@@ -29,7 +32,10 @@ $(document).ready(function(){
             $.ajax({
                 type: 'POST',
                 url: 'https://rishukr06.000webhostapp.com/code/sendgrid/code/index.php',
-                data: {'name':name},
+                data: {
+                    'name':name,
+                     'mobile':mobile
+                      },
      
                 cache: false,
                
