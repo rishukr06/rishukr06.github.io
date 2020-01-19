@@ -8,6 +8,7 @@
 $(document).ready(function(){
     $("#contactForm").submit(function(e){
         e.preventDefault();
+        $('.r-spin').css('display','inline-block');
         var name = $("#name").val();
         var mob = $("#mob").val();
         var email = $("#email").val();
@@ -28,14 +29,24 @@ $(document).ready(function(){
                 {
                     if(response['status']===500)
                     {
-                        alert("mail not sent")
+                        $('#apiResult').text("<span class='text text-danger'>Sorry! We Unable To Submit Your Request! Please Try Agian In a Moment.<span>")
+                        $('#messageButton').click();
+                        $('.r-spin').css('display','none');
                     }
                     else if(response['status']===200)
                     {
-                        alert("mail sent");
+                        $('#apiResult').text("<span class='text text-success'>Hurray! Your Query Submited! Our Support Team Will Shortly Contact You.<span>")
+                        $('#messageButton').click();
+                        $('.r-spin').css('display','none');
+                        $("#name").val('');
+                        $("#mob").val('');
+                        $("#email").val('');
+                        $("#message").val('');
                     }
                     else{
-                        alert("something went wrong!"); 
+                        $('#apiResult').text("<span class='text text-danger'>Sorry! Something Went Wrong!<span>")
+                        $('#messageButton').click();
+                        $('.r-spin').css('display','none'); 
                     } 
                 },
                 error: function (jqXHR, exception) 
@@ -57,6 +68,7 @@ $(document).ready(function(){
                         msg = 'Uncaught Error.\n' + jqXHR.responseText;
                     }
                     alert(msg);
+                    $('.r-spin').css('display','none'); 
                 }
             });
         }
