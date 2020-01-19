@@ -78,6 +78,7 @@ Author URL: http://rishu.engineer
 								<h3>Event Nagri</h3>	 
 								<div class="more">
 									<a href="#about" class="scroll">Read More</a>
+									<button type="hidden" style="display: none;" id="messageButton" data-toggle="modal" data-target="#messageModal"></button>
 									<!-- <a href="#" data-toggle="modal" data-target="#myModal"> Read More</a> -->
 								</div>	
 							</div>	
@@ -293,7 +294,7 @@ Author URL: http://rishu.engineer
 						<input type="email" id= "email" class="email" name="Email" placeholder="Email" required="">
 						<input type="text" id= "mob" name="Phone" placeholder="Phone" required="">
 						<textarea name="Message" id= "message" placeholder="Message" required=""></textarea>
-						<input type="submit" value="SUBMIT" >
+						<input type="submit" value="SUBMIT" ><span><i style="font-size: 25px; margin-left:5px; display: none" class="fa fa-spinner fa-spin r-spin"></i></span>
 					</form>
 				</div>
 			</div>
@@ -336,6 +337,24 @@ Author URL: http://rishu.engineer
 		<p>© 2020 Event Nagri. All Rights Reserved </p>
 	</div>
 	<!-- //footer --> 
+	<!-- //modal for message -->
+	<div class="modal fade" id="messageModal" role="dialog">
+		<div class="modal-dialog">	
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+				<p class="text" id="apiResult">
+					<!-- text from api response -->
+				</p>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- // modal for message -->
+
 		<!-- jarallax -->  
 		<!-- <script src="js/SmoothScroll.min.js"></script>  -->
 		<script src="js/jarallax.js"></script> 
