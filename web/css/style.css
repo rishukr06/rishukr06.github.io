@@ -199,6 +199,12 @@ nav.navbar.navbar-default {
     top: 0;
     font-size: 1.6em;
 }
+.r-spin{
+    margin-left: 15px;
+    margin: 1em 0 0 0;
+    -webkit-appearance: none;
+    color:#eea722;
+}
 .sb-search.sb-search-open .sb-search-submit,.no-js .sb-search .sb-search-submit {
 	z-index: 90;
 }
