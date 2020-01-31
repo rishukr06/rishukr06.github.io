@@ -1,5 +1,5 @@
 /**
-* api to send mail to enventnagri support team.
+* send mail to enventnagri support team.
 *
 * @author Rishu Kumar
 */
@@ -67,7 +67,7 @@ $(document).ready(function(){
                     } else {
                         msg = 'Uncaught Error.\n' + jqXHR.responseText;
                     }
-                    alert(msg);
+                    //alert(msg);
                     $('.r-spin').css('display','none'); 
                 }
             });

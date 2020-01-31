@@ -199,12 +199,6 @@ nav.navbar.navbar-default {
     top: 0;
     font-size: 1.6em;
 }
-.r-spin{
-    margin-left: 15px;
-    margin: 1em 0 0 0;
-    -webkit-appearance: none;
-    color:#eea722;
-}
 .sb-search.sb-search-open .sb-search-submit,.no-js .sb-search .sb-search-submit {
 	z-index: 90;
 }
@@ -727,6 +721,7 @@ p {
 }
 .filtr-item {
     padding-top: 30px;
+    overflow: hidden;
 }
 .hover {
   width: 100%;
@@ -900,12 +895,16 @@ p {
     width: 32px;
 }  
 .logo-width{
-    width: 100px;
+    width: 130px;
+    transform: scale(1.12);
 }
 
 @media only screen and (max-width: 767px) {
     .logo-width{
         width: 100% !important;
+        position: relative !important;
+        left:57% !important;
+        transform: translateX(-50%) scale(1) !important;
     }
   }
 
@@ -1013,6 +1012,12 @@ p {
     transition: 0.5s all;
     -moz-transition: 0.5s all;
 }
+.r-spin{
+    margin-left: 15px;
+    margin: 1em 0 0 0;
+    -webkit-appearance: none;
+    color:#eea722;
+}
 .contact  input[type="submit"]:hover {
     background: none;
     color:#eea722;
@@ -1077,6 +1082,7 @@ p {
 .w3l_footer_nav li a:hover,.w3l_footer_nav li a.active{
 	color:#eea722;
 }
+
 .footer-w3copy {
     background: #171717;
     padding: 2em 2em;
@@ -1133,6 +1139,7 @@ p {
 	-moz-transition:.5s all; 
 	transition:.5s all;
 } 
+
 .w3layouts_footer_grid form:hover input[type="submit"]{
 	background:#988aee;
 	color:#fff;
