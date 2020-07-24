@@ -39,22 +39,22 @@
                     type: "LiveStream",
                     target: document.querySelector('#scanner-container'),
                     constraints: {
-                        width: window.innerWidth - 20,
-                        height: 200,
+                        width: 200,
+                        height: window.innerWidth - 20,
                         facingMode: "environment"
                     },
                 },
                 decoder: {
                     readers: [
-                        "code_128_reader",
-                        "ean_reader",
-                        "ean_8_reader",
-                        "code_39_reader",
-                        "code_39_vin_reader",
-                        "codabar_reader",
-                        "upc_reader",
-                        "upc_e_reader",
-                        "i2of5_reader"
+                        "code_128_reader"
+                        // "ean_reader",
+                        // "ean_8_reader",
+                        // "code_39_reader",
+                        // "code_39_vin_reader",
+                        // "codabar_reader",
+                        // "upc_reader",
+                        // "upc_e_reader",
+                        // "i2of5_reader"
                     ],
                     debug: {
                         showCanvas: true,
