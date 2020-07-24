@@ -22,9 +22,12 @@
     <div id="scanner-container"></div>
     <input type="button" id="btn" value="Start/Stop the scanner" />
 
+    <div id="result"></div>
+
    
     <script>
         var scannerIsRunning = false;
+        var result_div = document.getElementById('result');
 
         function startScanner() {
             Quagga.init({
@@ -68,11 +71,11 @@
 
             }, function (err) {
                 if (err) {
-                    window.write('ERROR: ' + err + '<br>');
+                    result_div.innerHTML = 'ERROR: ' + err + '<br>';
                     return
                 }
 
-                window.write("<br>Initialization finished. Ready to start<br>");
+                result_div.innerHTML = "<br>Initialization finished. Ready to start<br>";
                 Quagga.start();
 
                 // Set flag to is running
@@ -105,7 +108,7 @@
 
 
             Quagga.onDetected(function (result) {
-                window.write("Barcode detected and processed : [" + result.codeResult.code + "]<br>", result);
+                result_div.innerHTML = "Barcode detected and processed : [" + result.codeResult.code + "]<br>";
             });
         }
 
