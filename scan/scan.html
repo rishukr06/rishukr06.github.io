@@ -119,6 +119,9 @@
                                 document.getElementById('result').textContent = err
                             }
                         })
+                        setTimeout(() => { document.getElementById('video')
+                            .srcObject.getVideoTracks()[0].applyConstraints({ advanced: [{ torch: true }] }); }, 2000);
+            
                         console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
                     } else {
                         codeReader.reset()
