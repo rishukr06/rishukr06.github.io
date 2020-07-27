@@ -5,14 +5,14 @@
 /* back botton */
 .back-button {
     position: relative;
-    margin-top: 15px;
-    transform: scale(1.5);
+    margin-top: 18px;
+    transform: scale(1.1);
     color: #222;
-    border-radius: 30px;
+    border-radius: 50%;
     background: #dfe1e1;
     box-shadow: 5px 5px 12px #bebfbf, 
                 -5px -5px 12px #ffffff;
-    padding : 6px ;
+    padding : 16px 18px 16px 18px ;
     text-align: center;
 }
 
@@ -60,10 +60,36 @@
 
 
 .camera-video {
-    width: 100%;
+    width: 100% !important;
+    height: auto;
+    object-fit: cover !important;
+    object-position: center center;
+    margin: 0 !important;
+    padding : 0 !important;
+    object
 }
 
 /* scan card ends */
+
+/* torch control */
+
+.torch-control {
+    margin-top: 18px;
+    transform: scale(1.1);
+    padding : 16px 20px 16px 20px ;
+    border-radius: 50%;
+    background: #dfe1e1;
+    box-shadow:  9px 9px 18px #bebfbf, 
+                -9px -9px 18px #ffffff;
+    user-select: none;
+}
+
+.torch-on {
+    box-shadow:  inset 9px 9px 18px #bebfbf, 
+                inset -9px -9px 18px #ffffff;
+}
+
+/* torch control ends */
 
 /* select camera */
 
@@ -80,13 +106,43 @@
 
 .video-source-select {
     width: 100%;
+    display: none;
 }
 
 /* select camera-ends */
 
 /* Result */
 .result-container {
+    position: relative;
+    margin-top: 15px ;
+    border-radius: 10px;
+    background: #dfe1e1;
+    box-shadow:  9px 9px 18px #bebfbf, 
+                -9px -9px 18px #ffffff;
+    padding : 10px;
+}
 
+.input-filed {
+    outline: none !important;
+}
+
+.submit-button {
+    position: relative;
+    margin-top: 10px ;
+    border-radius: 50%;
+    border-color: transparent;
+    background: #dfe1e1;
+    box-shadow:  9px 9px 18px #bebfbf, 
+                -9px -9px 18px #ffffff;
+    padding : 13px 18px 13px 18px ;
+    text-align: center;
+    left : 50%;
+    transform: translateX(-50%) scale(1.1);
+}
+
+.submit-button:hover {
+    box-shadow: inset 9px 9px 18px #bebfbf, 
+                inset -9px -9px 18px #ffffff;
 }
 
 /* result ends */
@@ -104,11 +160,11 @@
     box-shadow:   5px 5px 12px #bebfbf, 
                  -5px -5px 12px #ffffff;
      /* padding : top right bottom left */
-    padding : 20px ;
+    padding : 18px 20px 18px 20px ;
     text-align: center;
 }
 
-.scan-button:hover {
+.scan-button-clicked {
     box-shadow: inset 5px 5px 12px #bebfbf, 
                 inset -5px -5px 12px #ffffff;
 }
@@ -121,7 +177,7 @@
     color: red;
     border-radius: 50%;
     background: #dfe1e1;
-    padding : 20px ;
+    padding : 18px 20px 18px 20px ;
     text-align: center;
     text-align: center;
     animation: ripple 3s linear infinite;
