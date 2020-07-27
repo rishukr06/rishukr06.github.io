@@ -91,7 +91,7 @@
         console.log('ZXing code reader initialized')
         codeReader.getVideoInputDevices()
             .then((videoInputDevices) => {
-                selectedDeviceId = videoInputDevices[0].deviceId
+                selectedDeviceId = videoInputDevices[1].deviceId
                 
                 document.getElementById('startButton').addEventListener('click', () => {
 
