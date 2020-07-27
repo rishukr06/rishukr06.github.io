@@ -1,3 +1,4 @@
+	                
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +92,12 @@
         console.log('ZXing code reader initialized')
         codeReader.getVideoInputDevices()
             .then((videoInputDevices) => {
-                selectedDeviceId = videoInputDevices[1].deviceId
+                if(videoInputDevices[1].deviceId)
+                {
+                    selectedDeviceId = videoInputDevices[1].deviceId
+                } else {
+                    selectedDeviceId = videoInputDevices[0].deviceId
+                }
                 
                 document.getElementById('startButton').addEventListener('click', () => {
 
@@ -110,7 +116,7 @@
                         codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
                             if (result) {
                                 console.log(result)
-                                document.getElementById('result').textContent = result.text
+                                document.getElementById('result').value = result.text
                             }
                             if (err && !(err instanceof ZXing.NotFoundException)) {
                                 console.error(err)
