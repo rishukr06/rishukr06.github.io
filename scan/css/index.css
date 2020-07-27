@@ -46,6 +46,7 @@
     padding-left : 15px;
     padding-top : 15px;
     font-size: small;
+    user-select: none;
 }
 
 .logout-icon {
@@ -89,6 +90,10 @@
     background: #dfe1e1;
     box-shadow:  9px 9px 18px #bebfbf, 
                 -9px -9px 18px #ffffff;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none; 
 }
 
 .qc-button:hover {
@@ -106,6 +111,10 @@
     background: #dfe1e1;
     box-shadow:  9px 9px 18px #bebfbf, 
                 -9px -9px 18px #ffffff;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none; 
 }
 
 .rnm-button:hover {
