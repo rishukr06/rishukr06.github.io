@@ -92,17 +92,7 @@
         codeReader.getVideoInputDevices()
             .then((videoInputDevices) => {
                 selectedDeviceId = videoInputDevices[0].deviceId
-                if (videoInputDevices.length > 1) {
-                    videoInputDevices.forEach((element) => {
-                        if(element.label === 'facing back' || element.label === 'environment')
-                        {
-                            selectedDeviceId = element.deviceId;
-                        }
-                    });
-                } else if (videoInputDevices.length === 1) {
-                    selectedDeviceId = videoInputDevices.deviceId;
-                } 
-
+                
                 document.getElementById('startButton').addEventListener('click', () => {
 
                     if (camera === "off")
