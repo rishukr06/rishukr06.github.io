@@ -1,4 +1,3 @@
-	                
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +36,7 @@
         <div class="result-container">
             <label><i> Scan Result: </i></label>
             
-            <form action="" class="result-input">
+            <form action="" name="pidForm" class="result-input">
                 <input 
                     type="text" 
                     class="form-control input-filed" 
@@ -46,11 +45,11 @@
                     maxlength=19 
                     id="result"
                     required
-		    readonly
+                    readonly
                 />
-                <button type="submit" class="submit-button">
+                <div onclick="submitForm()" class="submit-button">
                     <i class="fa fa-arrow-right"></i>
-                </button>
+                </div>
             </form>
         
         </div>
@@ -165,6 +164,19 @@
                 .srcObject.getVideoTracks()[0]
                 .applyConstraints({ advanced: [{ torch: false }] });
             }
+        }
+
+        function submitForm()
+        {
+            var pid = document.getElementById('result');
+            var form = document.getElementById('pidForm');
+            if(pid.lenght !== 19)
+            {
+                alert('Wrong Input!\nPlease Scan Again')
+            } else {
+                form.submit();
+            }
+
         }
     </script>
 
