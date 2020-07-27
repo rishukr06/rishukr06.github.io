@@ -1,0 +1,115 @@
+.body-bg{
+    background: #dfe1e1;
+}
+
+/* profile-card-css */
+
+.user-info-container{
+    height: 200px;
+    background: #dfe1e1;
+    border-radius: 18px;
+    box-shadow:  9px 9px 18px #bebfbf, 
+    -9px -9px 18px #ffffff;
+}
+
+.profile-pic-container {
+    width: 35%;
+    position: relative;
+}
+
+.profile-pic {
+    position : absolute;
+    top : 50% ;
+    left : 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 18px;
+    background: #dfe1e1;
+    box-shadow:  9px 9px 18px #bebfbf, 
+                -9px -9px 18px #ffffff;
+    height: 100px;
+    width: 100px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.profile-details-container {
+    width : 65%;
+    position: relative;
+}
+
+.profile-details {
+    position : absolute;
+    top : 50% ;
+    left : 50%;
+    transform: translate(-50%,-50%);
+    padding-left : 15px;
+    padding-top : 15px;
+    font-size: small;
+}
+
+.logout-icon {
+    position: absolute;
+    bottom: 0;
+    right : 0;
+    transform: translate(-50%,-50%) scale(1.2);
+    color: red;
+    border-radius: 13px;
+    background: #dfe1e1;
+    box-shadow:   5px 5px 12px #bebfbf, 
+                 -5px -5px 12px #ffffff;
+    padding: 5px;
+    text-align: center;
+}
+
+.logout-icon:hover {
+    box-shadow: inset  7px 7px 12px #bebfbf, 
+                inset -7px -7px 12px #ffffff;
+}
+/* profile-card-css-ends */
+
+/* Button-container-css */
+
+.button-container {
+    margin-top: 130px;
+    height: 90px;
+}
+
+.qc-button-container, .rnm-button-container {
+    position: relative;
+}
+
+.qc-button {
+    position : absolute;
+    left : 50%;
+    transform: translateX(-50%);
+    /* padding : top right bottom left */
+    padding : 30px 30px 30px 30px ;
+    border-radius: 18px;
+    background: #dfe1e1;
+    box-shadow:  9px 9px 18px #bebfbf, 
+                -9px -9px 18px #ffffff;
+}
+
+.qc-button:hover {
+    box-shadow: inset 9px 9px 18px #bebfbf, 
+                inset -9px -9px 18px #ffffff;
+}
+
+.rnm-button {
+    position : absolute;
+    left : 50%;
+    transform: translateX(-50%);
+    /* padding : top right bottom left */
+    padding : 30px 26px 30px 26px ;
+    border-radius: 18px;
+    background: #dfe1e1;
+    box-shadow:  9px 9px 18px #bebfbf, 
+                -9px -9px 18px #ffffff;
+}
+
+.rnm-button:hover {
+    box-shadow: inset 9px 9px 18px #bebfbf, 
+                inset -9px -9px 18px #ffffff;
+}
+/* Button-container-css-ends */
