@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/scan.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- Font-Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title> ERP - mWeb </title>
+</head>
+
+<body class="body-bg">
+    <div class="container-fluid">
+        <!-- back button -->
+        <a href="./">
+            <i class="fa fa-arrow-left back-button"></i>
+        </a>
+
+        <!-- scan-card -->
+        <div class="container scan-card-container mt-4 d-flex" >
+            <i class="fa fa-camera" id="camera-icon"></i>
+            <span class="vertical-rod" id="vertical-rod"></span>
+            <span class="hotizontal-rod" id="horizontal-rod"></span>
+            <video id="video" class="camera-video"></video>
+        </div>
+
+        <!-- select camera -->
+        <div id="sourceSelectPanel" class = "container video-source-container">
+            <select id="sourceSelect" class = "video-source-select">
+            </select>
+        </div>
+
+        <!-- Result -->
+        <div class="result-container mt-5">
+            <label><i> Scan Result: </i></label>
+            <pre><code id="result"></code></pre>
+        </div>
+       
+
+        <!-- Scan Button -->
+        <i id="startButton" class="fa fa-qrcode scan-button"></i>
+        <span class="fa fa-qrcode ripple"></span>
+        <!-- <span class="scan-button-animation"></span> -->
+
+    </div>
+
+
+    <!-- scanner code -->
+
+    <script type="text/javascript" src="./js/scan.js"></script>
+    <script type="text/javascript">
+        
+        //global var
+        var camera = "off"; 
+
+        var verticalRod = document.getElementById('vertical-rod');
+        var horizontalRod = document.getElementById('horizontal-rod');
+        var cameraIcon = document.getElementById('camera-icon');
+
+        if( camera === "on") {
+            verticalRod.style.display = "block";
+            horizontalRod.style.display = "block";
+            cameraIcon.style.display = "none";
+        } else {
+            verticalRod.style.display = "none";
+            horizontalRod.style.display = "none";
+            cameraIcon.style.display = "block";
+        }
+
+        window.addEventListener('load', function () {
+        let selectedDeviceId;
+        const codeReader = new ZXing.BrowserMultiFormatReader()
+        console.log('ZXing code reader initialized')
+        codeReader.getVideoInputDevices()
+            .then((videoInputDevices) => {
+                const sourceSelect = document.getElementById('sourceSelect')
+                selectedDeviceId = videoInputDevices[0].deviceId
+                if (videoInputDevices.length >= 1) {
+                    videoInputDevices.forEach((element) => {
+                    const sourceOption = document.createElement('option')
+                    sourceOption.text = element.label
+                    sourceOption.value = element.deviceId
+                    sourceSelect.appendChild(sourceOption)
+                    })
+
+                    sourceSelect.onchange = () => {
+                    selectedDeviceId = sourceSelect.value;
+                    };
+
+                    const sourceSelectPanel = document.getElementById('sourceSelectPanel')
+                    sourceSelectPanel.style.display = 'block'
+                }
+
+                document.getElementById('startButton').addEventListener('click', () => {
+
+                    if (camera === "off")
+                    {
+                        camera = "on";
+                        cameraIcon.style.display = "none";
+
+                        document.getElementById('startButton').classList.remove('fa-qrcode');
+                        document.getElementById('startButton').classList.add('fa-times');
+
+                        verticalRod.style.display = "block";
+                        horizontalRod.style.display = "block";
+
+                        codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+                            if (result) {
+                                console.log(result)
+                                document.getElementById('result').textContent = result.text
+                            }
+                            if (err && !(err instanceof ZXing.NotFoundException)) {
+                                console.error(err)
+                                document.getElementById('result').textContent = err
+                            }
+                        })
+                        console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+                    } else {
+                        codeReader.reset()
+                        camera = "off";
+                        
+                        document.getElementById('startButton').classList.remove('fa-times');
+                        document.getElementById('startButton').classList.add('fa-qrcode');
+                        
+                        verticalRod.style.display = "none";
+                        horizontalRod.style.display = "none";
+
+                        cameraIcon.style.display = "block";
+                    }
+                })
+
+            })
+            .catch((err) => {
+            console.error(err)
+            })
+        })
+    </script>
+
+</body>
+</html>
