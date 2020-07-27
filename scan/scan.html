@@ -92,7 +92,7 @@
         console.log('ZXing code reader initialized')
         codeReader.getVideoInputDevices()
             .then((videoInputDevices) => {
-                if(videoInputDevices[1].deviceId)
+                if(videoInputDevices[1])
                 {
                     selectedDeviceId = videoInputDevices[1].deviceId
                 } else {
