@@ -1,136 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title></title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        /* In order to place the tracking correctly */
-        canvas.drawing, canvas.drawingBuffer {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
 
-    <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- Font-Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title> ERP - mWeb </title>
 </head>
-
-<body>
-    <!-- Div to show the scanner -->
-    <div id="scanner-container"></div>
-    <input type="button" onclick="start_stop()" id="btn" value="Start/Stop the scanner" />
-
-    <div id="result"></div>
-
-   
-    <script>
-
-        var _scannerIsRunning = false ;
-
-        function startScanner() {
+<body class="body-bg">
+    <div class="container-fluid">
+        <!-- profile-card -->
+        <div class="container user-info-container mt-5 d-flex">
             
-            var result_div = document.getElementById('result');
+            <!-- profile pic -->
+            <div class="profile-pic-container">
+                <div class="profile-pic"
+                style = "background-image : url('')"
+                ></div>
+            </div>
 
-            Quagga.init({
-                inputStream: {
-                    name: "Live",
-                    type: "LiveStream",
-                    target: document.querySelector('#scanner-container'),
-                    constraints: {
-                        width: 140,
-                        height: window.innerWidth - 20,
-                        facingMode: "environment"
-                    },
-                },
-                decoder: {
-                    readers: [
-                        "code_128_reader"
-                        // "ean_reader",
-                        // "ean_8_reader",
-                        // "code_39_reader",
-                        // "code_39_vin_reader",
-                        // "codabar_reader",
-                        // "upc_reader",
-                        // "upc_e_reader",
-                        // "i2of5_reader"
-                    ],
-                    debug: {
-                        showCanvas: true,
-                        showPatches: true,
-                        showFoundPatches: true,
-                        showSkeleton: true,
-                        showLabels: true,
-                        showPatchLabels: true,
-                        showRemainingPatchLabels: true,
-                        boxFromPatches: {
-                            showTransformed: true,
-                            showTransformedBox: true,
-                            showBB: true
-                        }
-                    }
-                },
+            <!-- profile details -->
+            <div class="profile-details-container">
+                <div class="profile-details">
+                    <h6> Rishu Kumar </h6>
+                    <p> rishuk606@gmail.com </p>
+                </div>
 
-            }, function (err) {
-                if (err) {
-                    result_div.innerHTML = 'ERROR: ' + err + '<br>';
-                    return
-                }
+                <a href="../">
+                    <i class="fa fa-power-off logout-icon" aria-hidden="true"></i>  
+                </a>
+            </div>
 
-                result_div.innerHTML = "<br>Initialization finished. Ready to start<br>";
-                Quagga.start();
+        </div>
 
-                // Set flag to is running
-                _scannerIsRunning = true;
-            });
+        <!-- Button- container -->
+        <div class="d-flex button-container">
 
-            Quagga.onProcessed(function (result) {
-                var drawingCtx = Quagga.canvas.ctx.overlay,
-                drawingCanvas = Quagga.canvas.dom.overlay;
+            <div class="qc-button-container w-50">
+                <!-- QC Button -->
+                <div class="qc-button"
+                    onClick = "window.location ='./scan.php?type=QC'"
+                >
+                    QC
+                </div>
+            </div>
 
-                if (result) {
-                    if (result.boxes) {
-                        drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
-                        result.boxes.filter(function (box) {
-                            return box !== result.box;
-                        }).forEach(function (box) {
-                            Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
-                        });
-                    }
-
-                    if (result.box) {
-                        Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
-                    }
-
-                    if (result.codeResult && result.codeResult.code) {
-                        Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
-                    }
-                }
-            });
-
-
-            Quagga.onDetected(function (result) {
-                result_div.innerHTML = "Barcode detected and processed : [" + result.codeResult.code + "]<br>";
-                Quagga.stop();
-                _scannerIsRunning = false;
-            });
-        }
-
-
-        // Start/stop scanner
-        function start_stop()
-        {
-            if (_scannerIsRunning) {
-                Quagga.stop();
-                _scannerIsRunning = false;
-        
-            } else {
-                startScanner();
-            }
-        }
-        
-    </script>
+            <div class="rnm-button-container w-50">
+                <!-- R&M Button -->
+                <div class="rnm-button"
+                    onClick = "window.location ='./scan.php?type=RNM'"
+                >
+                    R&M
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>
