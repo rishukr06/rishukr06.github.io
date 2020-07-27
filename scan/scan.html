@@ -20,6 +20,9 @@
         <a href="./">
             <i class="fa fa-arrow-left back-button"></i>
         </a>
+        <!-- FlashLight Contol -->
+        <i class="fa fa-bolt torch-control pull-right" id="flash" onclick="flashlight(this)" ></i>
+        
 
         <!-- scan-card -->
         <div class="container scan-card-container mt-4 d-flex" >
@@ -28,17 +31,26 @@
             <span class="hotizontal-rod" id="horizontal-rod"></span>
             <video id="video" class="camera-video"></video>
         </div>
-
-        <!-- select camera -->
-        <div id="sourceSelectPanel" class = "container video-source-container">
-            <select id="sourceSelect" class = "video-source-select">
-            </select>
-        </div>
-
+        
         <!-- Result -->
-        <div class="result-container mt-5">
+        <div class="result-container">
             <label><i> Scan Result: </i></label>
-            <pre><code id="result"></code></pre>
+            
+            <form action="" class="result-input">
+                <input 
+                    type="text" 
+                    class="form-control input-filed" 
+                    name="pid" 
+                    minlength="19" 
+                    maxlength=19 
+                    id="result"
+                    required
+                />
+                <button type="submit" class="submit-button">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </form>
+        
         </div>
        
 
@@ -57,6 +69,7 @@
         
         //global var
         var camera = "off"; 
+        var torch = "off";
 
         var verticalRod = document.getElementById('vertical-rod');
         var horizontalRod = document.getElementById('horizontal-rod');
@@ -78,23 +91,17 @@
         console.log('ZXing code reader initialized')
         codeReader.getVideoInputDevices()
             .then((videoInputDevices) => {
-                const sourceSelect = document.getElementById('sourceSelect')
                 selectedDeviceId = videoInputDevices[0].deviceId
-                if (videoInputDevices.length >= 1) {
+                if (videoInputDevices.length > 1) {
                     videoInputDevices.forEach((element) => {
-                    const sourceOption = document.createElement('option')
-                    sourceOption.text = element.label
-                    sourceOption.value = element.deviceId
-                    sourceSelect.appendChild(sourceOption)
-                    })
-
-                    sourceSelect.onchange = () => {
-                    selectedDeviceId = sourceSelect.value;
-                    };
-
-                    const sourceSelectPanel = document.getElementById('sourceSelectPanel')
-                    sourceSelectPanel.style.display = 'block'
-                }
+                        if(element.label === 'facing back' || element.label === 'environment')
+                        {
+                            selectedDeviceId = element.deviceId;
+                        }
+                    });
+                } else if (videoInputDevices.length === 1) {
+                    selectedDeviceId = videoInputDevices.deviceId;
+                } 
 
                 document.getElementById('startButton').addEventListener('click', () => {
 
@@ -105,6 +112,7 @@
 
                         document.getElementById('startButton').classList.remove('fa-qrcode');
                         document.getElementById('startButton').classList.add('fa-times');
+                        document.getElementById('startButton').classList.add('scan-button-clicked');
 
                         verticalRod.style.display = "block";
                         horizontalRod.style.display = "block";
@@ -119,21 +127,21 @@
                                 document.getElementById('result').textContent = err
                             }
                         })
-                        setTimeout(() => { document.getElementById('video')
-                            .srcObject.getVideoTracks()[0].applyConstraints({ advanced: [{ torch: true }] }); }, 2000);
-            
                         console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
                     } else {
                         codeReader.reset()
                         camera = "off";
                         
                         document.getElementById('startButton').classList.remove('fa-times');
+                        document.getElementById('startButton').classList.remove('scan-button-clicked');
                         document.getElementById('startButton').classList.add('fa-qrcode');
                         
                         verticalRod.style.display = "none";
                         horizontalRod.style.display = "none";
 
                         cameraIcon.style.display = "block";
+
+                        flashlight()
                     }
                 })
 
@@ -142,6 +150,25 @@
             console.error(err)
             })
         })
+
+        function flashlight(){
+            var x = document.getElementById('flash');
+            if(torch === "off" && camera === "on") {
+                document.getElementById('video')
+                .srcObject.getVideoTracks()[0]
+                .applyConstraints({ advanced: [{ torch: true }] })
+                
+                torch = "on"
+                x.classList.add('torch-on');
+                
+            } else {
+                torch = "off";
+                x.classList.remove('torch-on');
+                document.getElementById('video')
+                .srcObject.getVideoTracks()[0]
+                .applyConstraints({ advanced: [{ torch: false }] });
+            }
+        }
     </script>
 
 </body>
