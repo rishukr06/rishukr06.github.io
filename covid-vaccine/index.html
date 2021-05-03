@@ -35,8 +35,9 @@
         <button id="submitButton" onclick="fetch()"> Search </button>
 
     </center>
-        <div id="result"></div>
-  <div id='foot'> #No Corona Corona No 🦠</div>
+    <div id="result"></div>
+    <center> <div id='foot'> #No Corona Corona No 🦠</div> </center>
+
 <script>
 
     function init() {
@@ -129,15 +130,17 @@
                         let ageLimit = resp.centers[i].sessions[j].min_age_limit;
                         let pincode = resp.centers[i].pincode;
                         const element = document.createElement('div');
+                        element.style.width = '50%';
+                        element.style.margin = '0 auto';
                         element.innerHTML = `<p> <pre>
-{
-    block name : ${blockName},
-    name  : ${name},
-    available capacity : ${cap},
-    date : ${date},
-    min_age_limit : ${ageLimit},
-    pincode : ${pincode},
-}
+                                        {
+                                            block name : ${blockName},
+                                            name  : ${name},
+                                            available capacity : ${cap},
+                                            date : ${date},
+                                            min_age_limit : ${ageLimit},
+                                            pincode : ${pincode},
+                                        }
                                      </pre> </p>`;
                         result.appendChild(element);
                         resultCount++;
@@ -146,7 +149,7 @@
             }
 
             if(resultCount === 0) {
-                result.innerText = 'No Result Found 🥲';
+                result.innerHTML = '<center><p>No Result Found 🥲</p></center>';
             }
         } catch (e){
             console.log(e)
