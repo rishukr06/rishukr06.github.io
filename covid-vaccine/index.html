@@ -347,6 +347,8 @@
             if(localDate.length > 0) {
                 document.getElementById('date').value = localDate.split('-').reverse().join('-');
             }
+            let available = localStorage.getItem("availableCheck")
+            document.getElementById('available').checked = !!available;
         }
     }
 
@@ -421,6 +423,11 @@
             localStorage.setItem("district", dis);
             localStorage.setItem("date", date);
             localStorage.setItem("pincode", pin);
+            if (availableCheck.checked){
+                localStorage.setItem("availableCheck", 'checked');
+            } else {
+                localStorage.setItem("availableCheck", '');
+            }
             result.innerText = '';
             const api = await axios.get(URL);
             const resp = api.data;
