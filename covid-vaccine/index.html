@@ -129,19 +129,27 @@
                         let date = resp.centers[i].sessions[j].date;
                         let ageLimit = resp.centers[i].sessions[j].min_age_limit;
                         let pincode = resp.centers[i].pincode;
+
                         const element = document.createElement('div');
                         element.style.width = '50%';
                         element.style.margin = '0 auto';
-                        element.innerHTML = `<p> <pre>
-                                        {
-                                            block name : ${blockName},
-                                            name  : ${name},
-                                            available capacity : ${cap},
-                                            date : ${date},
-                                            min_age_limit : ${ageLimit},
-                                            pincode : ${pincode},
+                        element.style.borderRadius = '5px';
+                        if (cap > 0) {
+                            element.style.backgroundColor = '#90EE90';
+                        } else {
+                            element.style.backgroundColor = '#F08080';
+                        }
+
+                        element.innerHTML = `<p style="font-family: monospace;">
+                                        {<br>
+                                            &nbsp;&nbsp; block name : ${blockName},<br>
+                                            &nbsp;&nbsp; name : ${name},<br>
+                                            &nbsp;&nbsp; available capacity : ${cap},<br>
+                                            &nbsp;&nbsp; date : ${date},<br>
+                                            &nbsp;&nbsp; min_age_limit : ${ageLimit},<br>
+                                            &nbsp;&nbsp; pincode : ${pincode},<br>
                                         }
-                                     </pre> </p>`;
+                                      </p>`;
                         result.appendChild(element);
                         resultCount++;
                     }
