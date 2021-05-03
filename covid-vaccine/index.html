@@ -224,6 +224,13 @@
                 font-weight: 700;
                 color: #721c24;
             }
+            #result .green__box ul {
+                background-color: #D4EDDA;
+                border: 1px solid #D4EDDA;
+            }
+            #result .green__box span{
+                color: #136b25;
+            }
             footer div {
                 text-align: center;
                 font-size: 3rem;
@@ -379,7 +386,7 @@
                         element.style.margin = '0 auto';
                         element.style.borderRadius = '5px';
                         if (cap > 0) {
-                            element.style.backgroundColor = '#d4edda';
+                            element.classList.add('green__box');
                         } else {
                             element.style.backgroundColor = '#fff';
                         }
