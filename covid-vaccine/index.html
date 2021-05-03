@@ -3,40 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <title> Covid Vaccine Center 18+ </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+        <style>
+            /* Reset */
+            html, body, div, span, applet, object, iframe,
+            h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+            a, abbr, acronym, address, big, cite, code,
+            del, dfn, em, img, ins, kbd, q, s, samp,
+            small, strike, strong, sub, sup, tt, var,
+            b, u, i, center,
+            dl, dt, dd, ol, ul, li,
+            fieldset, form, label, legend,
+            table, caption, tbody, tfoot, thead, tr, th, td,
+            article, aside, canvas, details, embed,
+            figure, figcaption, footer, header, hgroup,
+            menu, nav, output, ruby, section, summary,
+            time, mark, audio, video {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-size: 100%;
+                vertical-align: baseline;
+                text-decoration: none;
+            }
+            article, aside, details, figcaption, figure,
+            footer, header, hgroup, menu, nav, section {
+                display: block;
+            }
+            body {
+                line-height: 1;
+            }
+            ol, ul {
+                list-style: none;
+                padding: 0 !important;
+            }
+            blockquote, q {
+                quotes: none;
+            }
+            blockquote:before, blockquote:after,
+            q:before, q:after {
+                content: '';
+                content: none;
+            }
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+            .container {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            h1,h2,h3,h4,h5,h6,p,body{
+                font-family: 'Roboto', sans-serif;
+            }
+            body {
+                margin: 0;
+            }
+            /* Switch */
+            .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            }
+
+            .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+            }
+
+            .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            }
+
+            .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            }
+
+            input:checked + .slider {
+            background-color: #02C8D0;
+            }
+
+            input:focus + .slider {
+            box-shadow: 0 0 1px #02C8D0;
+            }
+
+            input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+            border-radius: 34px;
+            }
+
+            .slider.round:before {
+            border-radius: 50%;
+            }
+            /* Custom */
+            ::placeholder {
+                color: #000;
+                opacity: 1;
+            }
+
+            :-ms-input-placeholder {
+                color: #000;
+            }
+
+            ::-ms-input-placeholder {
+                color: #000;
+            }
+            html {
+                font-size: 8px;
+                box-sizing: border-box;
+            }
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+            header {
+                background: #02C8D0;
+                padding: 15px;
+            }
+            header h2 {
+                color: #2D4C5F;
+                font-size: 2.5rem;
+                font-weight: 700;
+            }
+            section {
+                padding: 20px 15px;
+            }
+            .form-item {
+                margin-bottom: 15px;
+            }
+            .form-item label{
+                display: block;
+                font-size: 2rem;
+                margin-bottom: 5px;
+            }
+            .form-item .form-input {
+                display: block;
+                width: 100%;
+                min-height: 50px;
+                border-radius: 5px;
+                box-shadow: 0 0 0;
+                padding: 0 10px;
+                border: 1px solid #000;
+            }
+            .form-item .form-input:focus {
+                outline: 0;
+            }
+            .form-item.form-filter {
+                display: flex;
+                align-items: center;
+            }
+            .form-item.form-filter label {
+                margin-right: 10px;
+            }
+            #submitButton {
+                background: #02C8D0;
+                color: #fff;
+                font-size: 3rem;
+                box-shadow: 0 0 0;
+                border: 0;
+                padding: 10px;
+                border-radius: 5px;
+                margin: 0 auto;
+                display: block;
+                width: 100%;
+            }
+            #result center{
+                font-size: 3rem;
+                padding: 10px;
+                color: #721c24;
+                background-color: #f8d7da;
+                border: 1px solid #f5c6cb;
+                border-radius: 5px;
+                width: 90%;
+                margin: 0 auto 20px auto;
+            }
+            #result ul{
+                font-size: 1.5rem;
+                padding: 10px !important;
+                color: #721c24;
+                background-color: #f8d7da;
+                border: 1px solid #f5c6cb;
+                border-radius: 5px;
+                width: 90%;
+                margin: 0 auto 15px auto;
+            }
+            #result ul li {
+                margin: 0 0 5px 0;
+            }
+            #result span{
+                font-weight: 700;
+            }
+            footer div {
+                text-align: center;
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+        </style>
 </head>
 <body>
-    <h2 align="center"> Search 18+ covid 💉 center </h2>
-    <center>
-        <label for="pin" > Pincode </label>
-        <input type="number" id="pin" name="pin" placeholder="pincode"/>
-        <br/><br/>
-
-        <label for="state"> State </label>
-        <select id="state" onchange="fetchDistrict()">
-            <option value=""> select </option>
-        </select>
-        <br/><br/>
-
-        <label for="district"> District </label>
-        <select id="district"> </select>
-        <br/><br/>
-
-        <label for="date"> Date </label>
-        <input type="date" id="date">
-        <br/><br/>
-
-        <label for="available"> Filter on available vaccine > 0 </label>
-        <input type="checkbox" id="available">
-        <br><br>
-
+    <header>
+        <h2> Search 18+ covid 💉 centre </h2>
+    </header>
+    <section>
+        <div class="form-item">
+            <label for="pin" > Pincode </label>
+            <input type="number" class="form-input" id="pin" name="pin" placeholder="Pincode"/>
+        </div>
+        <div class="form-item">
+            <label for="state"> State </label>
+            <select id="state" class="form-input" onchange="fetchDistrict()">
+                <option value=""> Select State </option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="district"> District </label>
+            <select id="district" class="form-input"><option value=""> Select District </option> </select>
+        </div>
+        <div class="form-item">
+            <label for="date"> Date </label>
+            <input type="date" class="form-input" placeholder="Date" id="date">
+        </div>
+        <div class="form-item form-filter">
+            <label for="available"> Filter on available vaccine > 0 </label>
+            <label class="switch">
+                <input type="checkbox" id="available">
+                <span class="slider round"></span>
+              </label>
+        </div>
         <button id="submitButton" onclick="fetch()"> Search </button>
-
-    </center>
+    </section>
     <div id="result"></div>
-    <center> <div id='foot'> #No Corona Corona No 🦠</div> </center>
+    <footer> <div id='foot'> #No Corona Corona No 🦠</div> </footer>
 
 <script>
 
@@ -131,25 +356,24 @@
                         let pincode = resp.centers[i].pincode;
 
                         const element = document.createElement('div');
-                        element.style.width = '50%';
                         element.style.margin = '0 auto';
                         element.style.borderRadius = '5px';
                         if (cap > 0) {
-                            element.style.backgroundColor = '#90EE90';
+                            element.style.backgroundColor = '#d4edda';
                         } else {
-                            element.style.backgroundColor = '#F08080';
+                            element.style.backgroundColor = '#fff';
                         }
 
-                        element.innerHTML = `<p style="font-family: monospace;">
-                                        {<br>
-                                            &nbsp;&nbsp; block name : ${blockName},<br>
-                                            &nbsp;&nbsp; name : ${name},<br>
-                                            &nbsp;&nbsp; available capacity : ${cap},<br>
-                                            &nbsp;&nbsp; date : ${date},<br>
-                                            &nbsp;&nbsp; min_age_limit : ${ageLimit},<br>
-                                            &nbsp;&nbsp; pincode : ${pincode},<br>
-                                        }
-                                      </p>`;
+                        element.innerHTML = `
+                            <ul>
+                                <li>&nbsp;&nbsp; Block name : <span>${blockName}</span></li>
+                                <li>&nbsp;&nbsp; Name : <span>${name}</span></li>
+                                <li>&nbsp;&nbsp; Available capacity : <span>${cap}</span></li>
+                                <li>&nbsp;&nbsp; Date : <span>${date}</span></li>
+                                <li>&nbsp;&nbsp; Min Age Limit : <span>${ageLimit}</span></li>
+                                <li>&nbsp;&nbsp; Pincode : <span>${pincode}</span></li>
+                            </ul>
+                                      `;
                         result.appendChild(element);
                         resultCount++;
                     }
