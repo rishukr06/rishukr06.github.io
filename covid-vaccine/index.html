@@ -72,7 +72,7 @@
                 height: 34px;
             }
 
-            .switch input { 
+            .switch input {
                 opacity: 0;
                 width: 0;
                 height: 0;
@@ -239,6 +239,42 @@
             body {
                 background: url('./bg.svg');
             }
+            #or {
+                position: relative;
+                width: 100%;
+                height: 50px;
+                font-size: 16px;
+                line-height: 50px;
+                text-align: center;
+            }
+
+            #or::before,
+            #or::after {
+                position: absolute;
+                width: 45%;
+                height: 1px;
+
+                top: 24px;
+
+                background-color: #aaa;
+
+                content: '';
+            }
+
+            #or::before {
+                left: 0;
+            }
+
+            #or::after {
+                right: 0;
+            }
+            .plain-divider {
+                height: 1px;
+                width: 100%;
+                margin-bottom: 15px;
+                margin-top: 20px;
+                background-color: transparent;
+            }
             @media (min-width:768px) {
                 .web-box {
                     width: 50%;
@@ -263,6 +299,9 @@
                 <label for="pin" > Pincode </label>
                 <input type="number" class="form-input" id="pin" name="pin" placeholder="Pincode"/>
             </div>
+
+            <div id="or">OR</div>
+
             <div class="form-item">
                 <label for="state"> State </label>
                 <select id="state" class="form-input" onchange="fetchDistrict()">
@@ -273,6 +312,9 @@
                 <label for="district"> District </label>
                 <select id="district" class="form-input"><option value=""> Select District </option> </select>
             </div>
+
+            <div class="plain-divider"></div>
+
             <div class="form-item">
                 <label for="date"> Date </label>
                 <input type="date" class="form-input" placeholder="Date" id="date">
@@ -292,10 +334,21 @@
 
 <script>
 
-    function init() {
-        fetchState();
+    async function init() {
+        await fetchState();
         document.getElementById('date').value = new Date().toJSON().slice(0, 10);
-    };
+
+        if (typeof(Storage) !== "undefined") {
+            document.getElementById("pin").value = localStorage.getItem("pincode");
+            document.getElementById("state").value = localStorage.getItem("state");
+            await fetchDistrict();
+            document.getElementById("district").value = localStorage.getItem("district");
+            let localDate = localStorage.getItem("date");
+            if(localDate.length > 0) {
+                document.getElementById('date').value = localDate.split('-').reverse().join('-');
+            }
+        }
+    }
 
     const fetchState = async () => {
         try{
@@ -341,6 +394,7 @@
     }
 
     const fetch = async () => {
+        const state = document.getElementById('state').value;
         const pin = document.getElementById('pin').value;
         const dis = document.getElementById('district').value;
         let date = document.getElementById('date').value.split('-').reverse().join('-');
@@ -363,6 +417,10 @@
         const result = document.getElementById('result');
         let resultCount = 0;
         try {
+            localStorage.setItem("state", state);
+            localStorage.setItem("district", dis);
+            localStorage.setItem("date", date);
+            localStorage.setItem("pincode", pin);
             result.innerText = '';
             const api = await axios.get(URL);
             const resp = api.data;
