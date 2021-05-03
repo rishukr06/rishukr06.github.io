@@ -73,7 +73,7 @@
             const select = document.getElementById("state");
             const api = await axios.get(`https://cdn-api.co-vin.in/api/v2/admin/location/districts/${state}`);
             const resp = api.data;
-            console.log(resp)
+            // console.log(resp)
             for (let i=0; i<resp.districts.length; i++) {
                 let id = resp.districts[i].district_id;
                 let name = resp.districts[i].district_name;
@@ -113,7 +113,7 @@
             result.innerText = '';
             const api = await axios.get(URL);
             const resp = api.data;
-            console.log(resp)
+            // console.log(resp)
             for (let i=0; i<resp.centers.length; i++) {
                 for (j=0; j<resp.centers[i].sessions.length; j++) {
                     if (resp.centers[i].sessions[j].min_age_limit === 18) {
