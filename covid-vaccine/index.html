@@ -359,14 +359,16 @@
             document.getElementById("district").value = localStorage.getItem("district");
             // date
             let localDate = localStorage.getItem("date");
-            if(localDate.length > 0) {
-                document.getElementById('date').value = localDate.split('-').reverse().join('-');
+            if(localDate) {
+                document.getElementById('date').value = localDate;
             }
             // available filter
             let available = localStorage.getItem("availableCheck")
             document.getElementById('available').checked = !!available;
             // days filter
-            document.getElementById('days').value = localStorage.getItem("days");
+            if (localStorage.getItem("days")) {
+                document.getElementById('days').value = localStorage.getItem("days");
+            }
         }
     }
 
@@ -438,7 +440,7 @@
             return false;
         }
 
-        let date = document.getElementById('date').value.split('-').reverse().join('-');
+        let date = document.getElementById('date').value ; //.split('-').reverse().join('-');
         if (date.length === 0 || new Date(date).getTime() < new Date().getTime()) {
             date = new Date().toJSON().slice(0,10);
             document.getElementById('date').value = date;
