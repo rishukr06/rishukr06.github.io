@@ -9,7 +9,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-        <style>
+
+    <style>
             /* Reset */
             html, body, div, span, applet, object, iframe,
             h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -334,7 +335,9 @@
                     <span class="slider round"></span>
                   </label>
             </div>
-            <button id="submitButton" onclick="fetch()"> Search </button>
+            <button id="submitButton" onclick="fetch()">
+                Search
+            </button>
         </section>
         <div id="result"></div>
         <footer> <div id='foot'> #No Corona Corona No 🦠</div> </footer>
@@ -365,6 +368,10 @@
             // days filter
             document.getElementById('days').value = localStorage.getItem("days");
         }
+    }
+
+    function changeButtonText(x='Search'){
+        document.getElementById('submitButton').textContent = x;
     }
 
     const fetchState = async () => {
@@ -417,6 +424,7 @@
     }
 
     const fetch = async () => {
+        changeButtonText('Loading...');
         let uniqueResult = [];
         let resultMaxDate = new Date();
         const state = document.getElementById('state').value;
@@ -425,7 +433,8 @@
         const days = document.getElementById('days').value;
 
         if(!/^\d+$/.test(days)) {
-            alert('Days entry should be integer!')
+            alert('Days entry should be integer!');
+            changeButtonText();
             return false;
         }
 
@@ -456,9 +465,6 @@
                 let URL;
                 date = new Date(date);
                 let newDate = await date.addDays(d);
-
-                console.log('new Date', newDate);
-                console.log('max Date', resultMaxDate);
 
                 // check if data for this date is already fetched
                 if (newDate.getTime() < resultMaxDate.getTime()) continue;
@@ -542,8 +548,10 @@
                     '<img src="https://thumbs.gfycat.com/ElatedThoseFinch-max-1mb.gif" height="130" alt="mr.modi"/> ' +
                     '</center>';
             }
+            changeButtonText();
         } catch (e){
-            console.log(e)
+            console.log(e);
+            changeButtonText();
         }
     }
 
