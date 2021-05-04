@@ -461,7 +461,7 @@
             result.innerText = '';
 
             // loop to check for different dates
-            for (let d = 1; d < days; d = d+2) {
+            for (let d = 0; d <= days; d++) {
                 let URL;
                 date = new Date(date);
                 let newDate = await date.addDays(d);
