@@ -402,7 +402,6 @@
             selectD.options[i] = null;
         }
         try{
-            const select = document.getElementById("state");
             const api = await axios.get(`https://cdn-api.co-vin.in/api/v2/admin/location/districts/${state}`);
             const resp = api.data;
             // console.log(resp)
@@ -470,6 +469,9 @@
 
                 // check if data for this date is already fetched
                 if (newDate.getTime() < resultMaxDate.getTime()) continue;
+
+                // sleep for 0.5 sec
+                await new Promise(e => setTimeout(e, 500));
 
                 newDate = newDate.toJSON().slice(0,10).split('-').reverse().join('-');
 
