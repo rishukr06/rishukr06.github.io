@@ -1,0 +1,49 @@
+.r-btn {
+    padding: 10px 30px;
+    border: 1px solid #222;
+    border-radius: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    background: transparent;
+    transition: .5s;
+}
+
+.r-link {
+    text-decoration: none;
+}
+
+.code-container {
+    text-align: center;
+    overflow: auto;
+}
+
+#blog-description {
+    margin-left: 15%;
+    margin-right: 15%;
+    overflow: hidden;
+}
+
+.thing-to-keep-in-mind {
+    background-color: rgba(255,255,0,0.2);
+    padding: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.how-to-use {
+    background-color: rgba(2,2,2,0.1);
+    padding: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+@media only screen and (max-width: 749px) {
+    .main {
+        width: 100% !important;
+        margin: 0;
+        padding: 5px;
+    }
+    #blog-description {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="../assets/icon/blog-icon.png">
+    <title>Blog - rishu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body>
+<div class="container main">
+    <div class="container main border-bottom">
+
+        <div class="border-bottom mt-5 d-flex justify-content-between w-100">
+            <h2 class="text text-capitalize">
+                <a class="r-link" href="./index.html">
+                    <i class="fa fa-arrow-circle-left"></i>
+                </a>
+                Instagram Like Bot
+            </h2>
+
+            <p class="text text-black-50" id="publish-date"> 13th Sep. 2021</p>
+        </div>
+
+        <div class="mt-3 p-2" id="blog-description">
+            <h3 class="text text-dark">Ever wanted to like all the posts of your friends or family on
+                <a class="r-link" target="_blank" href="https://www.instagram.com/he_is_rishu"> Instagram </a> without actually doing it by yourself ?</h3>
+            <p class="text"> well here is the solution :) </p>
+            <p class="text">
+                Everything on web is an HTML element, and can be targeted by using its <mark>class</mark> or <mark>id</mark>.
+                On Instagram web as well you can target the post of a user by using the element's class (i.e <mark>_9AhH0</mark> in this case).
+                Now once the post is opened you can target the <mark>like</mark> button and fire <mark>click()</mark> event on it.
+            </p>
+            <p> And that's it... <br> <b>Note:</b> The account should be <mark>public</mark> or you should be <mark>following</mark> the user</p>
+
+            <h3 class="mt-4 text">Few Engineering stuff</h3>
+            <ul>
+                <li> In order to pull the post, Instagram hit a 'query' API and loads it.
+                    Now as this is an API call it takes some time to respond (i.e. our <mark>watchTime</mark> in following code).
+                    Loading time depends on various factor like how scalable the end server is ?, what is your current internet speed ? ect.
+                    This is important because you can not target something which is not there. Therefore, the post must be loaded before
+                    moving to further step.
+                </li>
+                <li class="mt-2"> Now once you click the like button, Instagram again makes an API call which preform <mark>write/update</mark>
+                    action on the database. Now this is an expensive API call and if allowed to be hit rigorously without any caution, it may result in DDoS attack.
+                    Therefore, to avoid this we generally use rate-Limiting logic (<b>Note:</b> I don't know what instagram is actually using for rate limiting,
+                    if you are interest further you can search about <mark>AWS WAF & cloudFront</mark>).
+                    If you continuously try to hit the <mark>like</mark> API, it will start throwing <mark>429(Too Many Requests response)</mark> error code.
+                    To avoid this we can put <mark>sleep()</mark> in between the API calls, and it should avoid the rate-limiting
+                    (<b>Note:</b> it does not mean that this should always work on very web app, but at the time this post is being written it works on instagram)
+                </li>
+            </ul>
+
+            <h3 class="mt-4 text"> ??? </h3>
+            <div class="thing-to-keep-in-mind">
+                <ul>
+                    <li>Class name <code>_9AhH0</code> and <code> _65Bje  coreSpriteRightPaginationArrow</code> does not look like human named.
+                        therefore, these attribute may be added at the time of build and maybe changed if instagram push a new release.
+                        If this is the case, then you have to find the new className and change your code. In that case I will try to update the blog but no promises.
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="mt-4 text"> How to Use </h3>
+            <div class="how-to-use">
+                <ol start="1">
+                    <li> Open Instagram on web.</li>
+                    <li> Go to your friend's profile or use <a target="_blank" class="r-link" href="https://www.instagram.com/he_is_rishu">mine</a>.</li>
+                    <li> Open console - <a target="_blank" class="r-link" href="https://support.monday.com/hc/en-us/articles/360002197259-How-to-Open-the-Developer-Console#:~:text=Step%201%3A%20To%20open%20the,Console%22%20tab%20in%20that%20window.">click me if you need help in this</a></li>
+                    <li> Copy the following <code>code</code> and paste it on the console and hit enter.</li>
+                </ol>
+                <br/>
+                <ul>
+                    <li> Change the <code>totalPost</code> value according to the no. of posts you want to like or to total no. of post user have.</li>
+                    <li> Change the <code>minWatchTime</code> value according to your internet speed (3000 = 3 sec)</li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="code-container w-auto mt-2">
+        <iframe
+                src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=javascript&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%252F%252F%2520%2540author%253A%2520Rishu%2520Kumar%2520%28https%253A%252F%252Frishu.engineer%252F%29%250A%252F%252F%2520%2540descrioption%253A%2520Instagram%2520Like%2520Bot%250Alet%2520counter%2520%253D%25200%253B%250Aconst%2520totalPost%2520%253D%2520200%253B%250A%252F%252F%2520sleep%2520to%2520avoid%2520429%250A%252F%252F%2520its%2520not%2520a%2520foolproof%2520solution%250Aconst%2520SleepTime%2520%253D%252025000%253B%250A%252F%252F%2520min%2520time%2520require%2520to%2520load%2520the%2520post%2520%7Edepends%2520on%2520your%2520internet%2520speed%250Aconst%2520minWatchTime%2520%253D%25203000%253B%250A%250Aconst%2520posts%2520%253D%2520document.getElementsByClassName%28%2522_9AhH0%2522%29%253B%250Aposts%255B0%255D.click%28%29%253B%250Aawait%2520new%2520Promise%28r%2520%253D%253E%2520setTimeout%28r%252C%2520minWatchTime%29%29%253B%250Aconst%2520firstLikeButton%2520%253D%2520document.querySelectorAll%28%27%255Baria-label%253D%2522Like%2522%255D%27%29%253B%250Aif%2520%28firstLikeButton.length%2520%253E%25200%29%2520%257B%250A%2520%2520%2520%2520firstLikeButton%255B0%255D.parentElement.click%28%29%253B%250A%257D%250A%250Afor%2520%28let%2520i%2520%253D%25200%253B%2520i%2520%253C%2520totalPost%253B%2520i%252B%252B%29%2520%257B%250A%2520%2520%2520%2520if%2520%28counter%2520%253D%253D%253D%252015%29%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520console.log%28%27Sleeping...%27%29%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520await%2520new%2520Promise%28r%2520%253D%253E%2520setTimeout%28r%252C%2520sleepTime%29%29%253B%250A%2520%2520%2520%2520%2520%2520%2509counter%2520%253D%25200%253B%250A%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520await%2520new%2520Promise%28r%2520%253D%253E%2520setTimeout%28r%252C%2520500%29%29%253B%250A%2520%2520%2520%2520const%2520next%2520%253D%2520document.getElementsByClassName%28%2522%2520_65Bje%2520%2520coreSpriteRightPaginationArrow%2522%29%253B%250A%2520%2520%2520%2520next%255B0%255D.click%28%29%253B%250A%2520%2520%2509%252F%252F%2520Random%2520Number%2520between%2520100%2520and%25201000%250A%2520%2520%2509const%2520randomMilliSeconds%2520%253D%2520Math.floor%28Math.random%28%29%2520*%2520%281000%2520-%2520100%2520%252B%25201%29%2520%252B%2520100%29%253B%250A%2520%2520%2509const%2520watchTime%2520%253D%2520minWatchTime%2520%252B%2520randomMilliSeconds%253B%250A%2520%2520%2520%2520await%2520new%2520Promise%28r%2520%253D%253E%2520setTimeout%28r%252C%2520watchTime%29%29%253B%250A%2520%2520%2520%2520const%2520likeButton%2520%253D%2520document.querySelectorAll%28%27%255Baria-label%253D%2522Like%2522%255D%27%29%253B%250A%2520%2520%2520%2520if%2520%28likeButton.length%2520%253E%25200%29%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520likeButton%255B0%255D.parentElement.click%28%29%253B%2520%250A%2520%2520%2520%2520%2520%2520%2509counter%2520%252B%253D%25201%253B%250A%2520%2520%2520%2520%2520%2520%2509console.log%28%2560counter%2520%253D%2520%2524%257Bcounter%257D%2560%29%253B%250A%2520%2520%2520%2520%257D%250A%257D"
+                style="width: 100%; height: 100%; border:0; overflow:auto;"
+                sandbox="allow-scripts allow-same-origin">
+        </iframe>
+        </div>
+        <ul class="text-black-50">
+            <li> This blog is only for educational purpose. </li>
+            <li>
+                <code>author: Rishu kumar
+                    | <a target="_blank" class="r-link" href="https://rishu.engineer/">Website</a>
+                    | <a target="_blank" class="r-link" href="https://linkedin.com/in/rishu-kumar-9a39ab148/">LinkedIn</a>
+                </code>
+            </li>
+        </ul>
+    </div>
+    <div class="text text-capitalize text-center mt-3 mb-4"> - End Of Blog -</div>
+
+    <p class="text-muted text-center mb-2 small">&copy; <span id="current-year"></span>. rishu.engineer</p>
+</div>
+<script src="../assets/js/global.js"></script>
+</body>
+</html>
