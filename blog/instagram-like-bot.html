@@ -41,10 +41,10 @@
                     This is important because you can not target something which is not there. Therefore, the post must be loaded before
                     moving to further step.
                 </li>
-                <li class="mt-2"> Now once you click the like button, Instagram again makes an API call which preform <mark>write/update</mark>
-                    action on the database. Now this is an expensive API call and if allowed to be hit rigorously without any caution, it may result in DDoS attack.
+                <li class="mt-2"> Now, once you click the like button, Instagram again makes an API call which preform <mark>write/update</mark>
+                    action on the database. This is an expensive API call and if allowed to be hit rigorously without any caution, it may result in DDoS attack.
                     Therefore, to avoid this we generally use rate-Limiting logic (<b>Note:</b> I don't know what instagram is actually using for rate limiting,
-                    if you are interest further you can search about <mark>AWS WAF & cloudFront</mark>).
+                    if you are interested further, you can search about <mark>AWS WAF & cloudFront</mark>).
                     If you continuously try to hit the <mark>like</mark> API, it will start throwing <mark>429(Too Many Requests response)</mark> error code.
                     To avoid this we can put <mark>sleep()</mark> in between the API calls, and it should avoid the rate-limiting
                     (<b>Note:</b> it does not mean that this should always work on every web app, but at the time this post is being written it works on instagram)
